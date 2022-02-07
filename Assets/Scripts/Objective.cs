@@ -6,11 +6,13 @@ using UnityEngine;
 class Objective {
     private Event expectedEvent;
     private String description;
+    private String completionAudio;
     private bool completed = false;
 
-    public Objective(Event expectedEvent, String description) {
+    public Objective(Event expectedEvent, String description, String completionAudio) {
         this.expectedEvent = expectedEvent;
         this.description = description;
+        this.completionAudio = completionAudio;
     }
 
     public String GetDescription() {
@@ -34,7 +36,7 @@ class Objective {
 
         AudioSource player = Player.instance.GetComponent<AudioSource>();
         yield return new WaitWhile(() => player.isPlaying);
-        AudioClip audio = Resources.Load<AudioClip>("Sounds/comp_reoppsengen");
+        AudioClip audio = Resources.Load<AudioClip>(completionAudio);
         if (audio != null) {
             player.PlayOneShot(audio);
             yield return new WaitForSeconds(audio.length);

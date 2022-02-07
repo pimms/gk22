@@ -19,8 +19,8 @@ class ObjectiveController: MonoBehaviour, EventListener {
     private int currentObjectiveIndex = 0;
 
     private ObjectiveController() {
-        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen"));
-        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Puss tennene"));
+        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "Sounds/comp_reoppsengen"));
+        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Puss tennene", "Sounds/comp_tannborste"));
     }
 
     void Start() {
