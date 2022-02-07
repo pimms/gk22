@@ -7,7 +7,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
     public Objective currentObjective {
         get {
-            if (currentObjectiveIndex < objectives.Count) {
+            if (currentObjectiveIndex < objectives.Length) {
                 return objectives[currentObjectiveIndex];
             } else {
                 return null;
@@ -15,12 +15,14 @@ class ObjectiveController: MonoBehaviour, EventListener {
         }
     }
 
-    private List<Objective> objectives = new List<Objective>();
+    private Objective[] objectives;
     private int currentObjectiveIndex = 0;
 
     private ObjectiveController() {
-        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "Sounds/comp_reoppsengen"));
-        objectives.Add(new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Puss tennene", "Sounds/comp_tannborste"));
+        objectives = new Objective [] {
+            new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "Sounds/comp_reoppsengen"),
+            new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Puss tennene", "Sounds/comp_tannborste"),
+        };
     }
 
     void Start() {
@@ -55,7 +57,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
     }
 
     public void HandleEvent(Event e) {
-        if (currentObjectiveIndex >= objectives.Count) {
+        if (currentObjectiveIndex >= objectives.Length) {
             return;
         }
 
