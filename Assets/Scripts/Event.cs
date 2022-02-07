@@ -6,7 +6,9 @@ using UnityEngine;
 
 public enum EventType {
     PlayerEnteredRoom,
-    PlayerLeftRoom
+    PlayerLeftRoom,
+    ObjectiveCompleted,
+    ObjectiveChanged,
 }
 
 public enum RoomType {
@@ -19,6 +21,10 @@ public enum RoomType {
 
 public class Event {
     public EventType type;
+
+    public Event(EventType type) {
+        this.type = type;
+    }
 }
 
 public class RoomEvent: Event {
@@ -32,8 +38,7 @@ public class RoomEvent: Event {
         return new RoomEvent(EventType.PlayerLeftRoom, room);
     }
 
-    private RoomEvent(EventType type, RoomType room) {
-        this.type = type;
+    private RoomEvent(EventType type, RoomType room) : base(type) {
         this.room = room;
     }
 

@@ -30,6 +30,8 @@ class Objective {
     }
 
     private IEnumerator Finalize() {
+        EventHub.instance.Raise(new Event(EventType.ObjectiveCompleted));
+
         AudioSource player = Player.instance.GetComponent<AudioSource>();
         yield return new WaitWhile(() => player.isPlaying);
         AudioClip audio = Resources.Load<AudioClip>("Sounds/comp_reoppsengen");
