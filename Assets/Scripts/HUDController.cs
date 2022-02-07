@@ -21,10 +21,8 @@ class HUDController: MonoBehaviour, EventListener {
 
     public void HandleEvent(Event e) {
         if (e.type == EventType.ObjectiveCompleted) {
-            Debug.Log("----------- COMPLETED ----------- ");
             OnObjectiveCompleted();
         } else if (e.type == EventType.ObjectiveChanged) {
-            Debug.Log("----------- CHANGED ----------- ");
             OnObjectiveChanged();
         }
     }
