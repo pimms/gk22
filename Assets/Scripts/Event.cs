@@ -50,6 +50,7 @@ public class RoomEvent: Event {
             return false;
         }
 
+        #pragma warning disable CS8600
         RoomEvent other = obj as RoomEvent;
         if (other == null) {
             return false;

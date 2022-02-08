@@ -6,13 +6,16 @@ using UnityEngine;
 class Objective {
     private Event expectedEvent;
     private String description;
-    private String completionAudio;
+    private String id;
     private bool completed = false;
 
-    public Objective(Event expectedEvent, String description, String completionAudio) {
+    private String activationAudio { get { return "Sounds/activate_" + id; } }
+    private String completionAudio { get { return "Sounds/comp_" + id; } }
+
+    public Objective(Event expectedEvent, String description, String id) {
         this.expectedEvent = expectedEvent;
         this.description = description;
-        this.completionAudio = completionAudio;
+        this.id = id;
     }
 
     public String GetDescription() {
@@ -21,6 +24,7 @@ class Objective {
 
     public void Activate() {
         Debug.Log("Activating objective: " + description);
+        ObjectiveController.instance.StartCoroutine(PlayAudio(activationAudio));
     }
 
     public void HandleEvent(Event e) {
@@ -33,15 +37,17 @@ class Objective {
 
     private IEnumerator Finalize() {
         EventHub.instance.Raise(new Event(EventType.ObjectiveCompleted));
+        yield return PlayAudio(completionAudio);
+        ObjectiveController.instance.ObjectiveFinalized(this);
+    }
 
+    private IEnumerator PlayAudio(String audio) {
         AudioSource player = Player.instance.GetComponent<AudioSource>();
         yield return new WaitWhile(() => player.isPlaying);
-        AudioClip audio = Resources.Load<AudioClip>(completionAudio);
-        if (audio != null) {
-            player.PlayOneShot(audio);
-            yield return new WaitForSeconds(audio.length);
+        AudioClip clip = Resources.Load<AudioClip>(audio);
+        if (clip != null) {
+            player.PlayOneShot(clip);
+            yield return new WaitForSeconds(clip.length);
         }
-
-        ObjectiveController.instance.ObjectiveCompleted(this);
     }
 }

@@ -20,8 +20,8 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
     private ObjectiveController() {
         objectives = new Objective [] {
-            new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "Sounds/comp_reoppsengen"),
-            new Objective(ItemEvent.placedItem(ItemType.Toothrush, SpotType.Toilet), "Puss tennene", "Sounds/comp_tannborste"),
+            new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "reoppsengen"),
+            new Objective(ItemEvent.placedItem(ItemType.Toothrush, SpotType.Toilet), "Puss tennene", "tannborste"),
         };
     }
 
@@ -42,7 +42,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
         EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
     }
 
-    public void ObjectiveCompleted(Objective objective) {
+    public void ObjectiveFinalized(Objective objective) {
         if (objective != currentObjective) {
             Debug.LogError("Objective completed is not the current objective");
             return;
