@@ -48,18 +48,15 @@ public class KeyboardGrabber : MonoBehaviour
     }
 
     GameObject GetTargetedObject() {
-        // Ray cast straight forward and return the first object hit.
         RaycastHit hit;
 
         Transform camera = Camera.main.transform;
         if (Physics.Raycast(camera.position, camera.forward, out hit)) {
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
             GameObject gameObject = hit.collider.gameObject;
             if (gameObject.GetComponent<OVRGrabbable>() != null) {
-                Debug.Log("Grabbing onto it!");
                 return gameObject;
             } else {
-                Debug.Log("Not grabbable :(");
+                Debug.Log("Object not grabbable: " + gameObject.name);
             }
         }
         return null;

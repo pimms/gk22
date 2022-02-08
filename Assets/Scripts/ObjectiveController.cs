@@ -21,7 +21,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
     private ObjectiveController() {
         objectives = new Objective [] {
             new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "Sounds/comp_reoppsengen"),
-            new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Puss tennene", "Sounds/comp_tannborste"),
+            new Objective(ItemEvent.placedItem(ItemType.Toothrush, SpotType.Toilet), "Puss tennene", "Sounds/comp_tannborste"),
         };
     }
 

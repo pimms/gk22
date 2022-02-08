@@ -9,6 +9,9 @@ public enum EventType {
     PlayerLeftRoom,
     ObjectiveCompleted,
     ObjectiveChanged,
+
+    ItemPlacedInSpot,
+    ItemRemovedFromSpot,
 }
 
 public enum RoomType {
@@ -57,5 +60,40 @@ public class RoomEvent: Event {
 
     public override int GetHashCode() {
         return type.GetHashCode() ^ room.GetHashCode();
+    }
+}
+
+public class ItemEvent: Event {
+    public ItemType item;
+    public SpotType spot;
+
+    public static ItemEvent placedItem(ItemType item, SpotType spot) {
+        return new ItemEvent(EventType.ItemPlacedInSpot, item, spot);
+    }
+
+    public static ItemEvent removedItem(ItemType item, SpotType spot) {
+        return new ItemEvent(EventType.ItemRemovedFromSpot, item, spot);
+    }
+
+    private ItemEvent(EventType type, ItemType item, SpotType spot) : base(type) {
+        this.item = item;
+        this.spot = spot;
+    }
+
+    public override bool Equals(object? obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        ItemEvent other = obj as ItemEvent;
+        if (other == null) {
+            return false;
+        }
+
+        return this.type == other.type && this.item == other.item && this.spot == other.spot; 
+    }
+
+    public override int GetHashCode() {
+        return type.GetHashCode() ^ item.GetHashCode() ^ spot.GetHashCode();
     }
 }
