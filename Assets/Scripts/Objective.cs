@@ -15,7 +15,12 @@ class Objective {
     public Objective(Event expectedEvent, String description, String id) {
         this.expectedEvent = expectedEvent;
         this.description = description;
-        this.id = id;
+        
+        if (id != null) {
+            this.id = id;
+        } else {
+            this.id = "";
+        }
     }
 
     public String GetDescription() {

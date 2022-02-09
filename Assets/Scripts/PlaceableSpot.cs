@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SpotType {
-    Toilet
+    None,
+    Toilet,
+    Head,
+    Legs,
+    Torso,
 }
 
 [RequireComponent(typeof(Collider))]
