@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum ItemType {
-    Toothrush,
+    Toothbrush,
     Fedora,
     Butt,
     Jeans,
     Shirt,
+    Head,
 }
 
 class PlaceableItem: MonoBehaviour {

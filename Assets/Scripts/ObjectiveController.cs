@@ -21,8 +21,9 @@ class ObjectiveController: MonoBehaviour, EventListener {
     private ObjectiveController() {
         objectives = new Objective [] {
             new Objective(ItemEvent.placedItem(ItemType.Fedora, SpotType.Head), "Kle på deg noe saklig", null),
+            new Objective(ItemEvent.placedItem(ItemType.Head, SpotType.ToiletHeadPosition), "Gå på do", null),
             new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "reoppsengen"),
-            new Objective(ItemEvent.placedItem(ItemType.Toothrush, SpotType.Toilet), "Puss tennene", "tannborste"),
+            new Objective(ItemEvent.placedItem(ItemType.Toothbrush, SpotType.Toilet), "Puss tennene", "tannborste"),
         };
     }
 

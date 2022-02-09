@@ -8,6 +8,7 @@ public enum SpotType {
     Head,
     Legs,
     Torso,
+    ToiletHeadPosition,
 }
 
 [RequireComponent(typeof(Collider))]
