@@ -37,17 +37,22 @@ class Objective {
 
     private IEnumerator Finalize() {
         EventHub.instance.Raise(new Event(EventType.ObjectiveCompleted));
-        yield return PlayAudio(completionAudio);
+        yield return PlayAudio(completionAudio, 5);
         ObjectiveController.instance.ObjectiveFinalized(this);
     }
 
-    private IEnumerator PlayAudio(String audio) {
+    private IEnumerator PlayAudio(String audio, float minWaitTime = -1) {
         AudioSource player = Player.instance.GetComponent<AudioSource>();
         yield return new WaitWhile(() => player.isPlaying);
         AudioClip clip = Resources.Load<AudioClip>(audio);
         if (clip != null) {
             player.PlayOneShot(clip);
-            yield return new WaitForSeconds(clip.length);
+
+            float waitTime = clip.length;
+            if (minWaitTime > clip.length) {
+                waitTime = minWaitTime;
+            }
+            yield return new WaitForSeconds(waitTime);
         }
     }
 }

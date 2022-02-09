@@ -7,16 +7,16 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
     public Objective currentObjective {
         get {
-            if (currentObjectiveIndex < objectives.Length) {
-                return objectives[currentObjectiveIndex];
-            } else {
+            if (transitioningBetweenObjectives || currentObjectiveIndex >= objectives.Length) {
                 return null;
             }
+            return objectives[currentObjectiveIndex];
         }
     }
 
     private Objective[] objectives;
     private int currentObjectiveIndex = 0;
+    private bool transitioningBetweenObjectives = false;
 
     private ObjectiveController() {
         objectives = new Objective [] {
@@ -28,7 +28,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
     void Start() {
         ObjectiveController.instance = this;
         EventHub.instance.AddListener(this);
-        StartCoroutine(NotifyFirstObjective());
+        StartCoroutine(ActivateCurrentObjective(3));
     }
 
     void Destroy() {
@@ -36,10 +36,13 @@ class ObjectiveController: MonoBehaviour, EventListener {
         EventHub.instance.RemoveListener(this);
     }
 
-    private IEnumerator NotifyFirstObjective() {
-        yield return new WaitForSeconds(3);
-        currentObjective.Activate();
-        EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+    private IEnumerator ActivateCurrentObjective(float delay) {
+        if (currentObjectiveIndex < objectives.Length) {
+            yield return new WaitForSeconds(delay);
+            transitioningBetweenObjectives = false;
+            objectives[currentObjectiveIndex].Activate();
+            EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+        }
     }
 
     public void ObjectiveFinalized(Objective objective) {
@@ -49,11 +52,9 @@ class ObjectiveController: MonoBehaviour, EventListener {
         }
 
         currentObjectiveIndex++;
-        if (currentObjective != null) {
-            currentObjective.Activate();
-        }
-
+        transitioningBetweenObjectives = true;
         EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+        StartCoroutine(ActivateCurrentObjective(3));
     }
 
     public void HandleEvent(Event e) {
@@ -61,6 +62,6 @@ class ObjectiveController: MonoBehaviour, EventListener {
             return;
         }
 
-        currentObjective.HandleEvent(e);
+        objectives[currentObjectiveIndex].HandleEvent(e);
     }
 }
