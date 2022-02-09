@@ -7,12 +7,20 @@ using TMPro;
 class HUDController: MonoBehaviour, EventListener {
 
     public TMP_Text objectiveLabel;
+    public Image textBackground;
     public Image checkbox;
+
+    private Vector3 initialPosition;
 
     void Start() {
         EventHub.instance.AddListener(this);
         objectiveLabel.text = "";
         checkbox.enabled = false;
+        initialPosition = transform.localPosition;
+    }
+
+    void Update() {
+        transform.localPosition = initialPosition;
     }
 
     void Destroy() {
@@ -52,8 +60,10 @@ class HUDController: MonoBehaviour, EventListener {
         Objective current = ObjectiveController.instance.currentObjective;
         if (current == null) {
             objectiveLabel.text = "";
+            textBackground.enabled = false;
         } else {
             objectiveLabel.text = current.GetDescription();
+            textBackground.enabled = true;
         }
     }
 }
