@@ -9,6 +9,11 @@ public enum ItemType {
     Jeans,
     Shirt,
     Head,
+    Beer,
+    Cheese,
+    Bread,
+    Cereal,
+    Milk,
 }
 
 class PlaceableItem: MonoBehaviour {
