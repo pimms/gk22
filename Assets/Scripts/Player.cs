@@ -40,6 +40,7 @@ public class Player : MonoBehaviour, EventListener
         eventSounds.Add(new EventSound(ItemType.Bread, SpotType.Head, "destroy_bread", false));
         eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Head, "destroy_banana", false));
         eventSounds.Add(new EventSound(ItemType.Chocolate, SpotType.Head, "destroy_chocolate", false));
+        eventSounds.Add(new EventSound(ItemType.Jeans, SpotType.Legs, "destroy_jeans", true));
 
         eventSounds.Add(new EventSound(ItemType.CD, SpotType.CDPlayer, "destroy_cd", true));
     }

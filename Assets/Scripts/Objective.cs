@@ -9,6 +9,7 @@ class Objective {
     private String id;
     private bool completed = false;
 
+    private string preactivationAudio { get { return "Sounds/preactivate_" + id; } }
     private String activationAudio { get { return "Sounds/activate_" + id; } }
     private String completionAudio { get { return "Sounds/comp_" + id; } }
 
@@ -27,15 +28,15 @@ class Objective {
         return description;
     }
 
-    public void Activate() {
-        Debug.Log("Activating objective: " + description);
-        ObjectiveController.instance.StartCoroutine(PlayAudio(activationAudio));
+    public IEnumerator Activate() {
+        yield return PlayAudio(preactivationAudio);
+        EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+        yield return PlayAudio(activationAudio);
     }
 
     public void HandleEvent(Event e) {
         if (!completed && expectedEvent.Equals(e)) {
             completed = true;
-            Debug.Log("Objective completed: " + description);
             ObjectiveController.instance.StartCoroutine(Finalize());
         }
     }
@@ -59,7 +60,6 @@ class Objective {
                 waitTime = clip.length;
             }
         }
-
 
         if (waitTime > 0) {
             yield return new WaitForSeconds(waitTime);

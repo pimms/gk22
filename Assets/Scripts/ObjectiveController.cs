@@ -42,8 +42,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
         if (currentObjectiveIndex < objectives.Length) {
             yield return new WaitForSeconds(delay);
             transitioningBetweenObjectives = false;
-            objectives[currentObjectiveIndex].Activate();
-            EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+            StartCoroutine(objectives[currentObjectiveIndex].Activate());
         }
     }
 
