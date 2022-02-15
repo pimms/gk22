@@ -15,6 +15,7 @@ public enum ItemType {
     Cereal,
     Milk,
     CD,
+    ToiletBrush,
 }
 
 class PlaceableItem: MonoBehaviour {
@@ -24,7 +25,7 @@ class PlaceableItem: MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         PlaceableSpot spot = other.GetComponent<PlaceableSpot>();
-        if (spot != null && spot.type == destroyWhenPlacedIn) {
+        if (spot != null && spot.type != SpotType.None && spot.type == destroyWhenPlacedIn) {
             Destroy(gameObject);
         }
     }

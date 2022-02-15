@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum SpotType {
     None,
+    Hand,
     Toilet,
     Head,
     Legs,

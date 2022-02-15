@@ -22,6 +22,11 @@ public class RoomListener : MonoBehaviour
         // Get the current game objects name
         string name = gameObject.name;
 
+        Player player = Player.instance;
+        if (player == null) {
+            Debug.Log("PLAYER IS NULL!");
+            return;
+        }
         bool isInRoomNow = (collider.bounds.Contains(Player.instance.transform.position));
 
         if (isInRoomNow != isPlayerInRoom) {

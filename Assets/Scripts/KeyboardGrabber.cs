@@ -27,6 +27,7 @@ public class KeyboardGrabber : MonoBehaviour
                 grabbedObject = GetTargetedObject();
                 if (grabbedObject != null) {
                     grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+                    grabbedObject.GetComponent<Grabbable>().KeyboardGrabBegin();
                     relativeDistance = Vector3.Distance(transform.position, grabbedObject.transform.position);
                     initialRotation = Camera.main.transform.rotation;
                 }
@@ -36,6 +37,7 @@ public class KeyboardGrabber : MonoBehaviour
                 state = State.Idle;
                 if (grabbedObject != null) {
                     grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+                    grabbedObject.GetComponent<Grabbable>().KeyboardGrabEnd();
                     grabbedObject = null;
                 }
             }
@@ -53,7 +55,7 @@ public class KeyboardGrabber : MonoBehaviour
         Transform camera = Camera.main.transform;
         if (Physics.Raycast(camera.position, camera.forward, out hit)) {
             GameObject gameObject = hit.collider.gameObject;
-            if (gameObject.GetComponent<OVRGrabbable>() != null) {
+            if (gameObject.GetComponent<Grabbable>() != null) {
                 return gameObject;
             } else {
                 Debug.Log("Object not grabbable: " + gameObject.name);
