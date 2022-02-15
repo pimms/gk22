@@ -18,6 +18,7 @@ public enum ItemType {
     ToiletBrush,
     Banana,
     Chocolate,
+    PS5Controller,
 }
 
 class PlaceableItem: MonoBehaviour {
