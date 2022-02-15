@@ -16,6 +16,8 @@ public enum ItemType {
     Milk,
     CD,
     ToiletBrush,
+    Banana,
+    Chocolate,
 }
 
 class PlaceableItem: MonoBehaviour {

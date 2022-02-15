@@ -11,13 +11,6 @@ public class Player : MonoBehaviour, EventListener
         public string sound;
         public bool onceOnly;
 
-        public EventSound(ItemType item, string sound, bool onceOnly = true) {
-            this.item = item;
-            this.spot = SpotType.Hand;
-            this.sound = sound;
-            this.onceOnly = onceOnly;
-        }
-
         public EventSound(ItemType item, SpotType spot, string sound, bool onceOnly = true) {
             this.item = item;
             this.spot = spot;
@@ -37,8 +30,18 @@ public class Player : MonoBehaviour, EventListener
 
         audioSource = GetComponent<AudioSource>();
 
-        eventSounds.Add(new EventSound(ItemType.Fedora, "pickup_fedora"));
-        eventSounds.Add(new EventSound(ItemType.Fedora, "drink_beer"));
+        eventSounds.Add(new EventSound(ItemType.Fedora, SpotType.Hand, "pickup_fedora", true));
+        eventSounds.Add(new EventSound(ItemType.Cereal, SpotType.Hand, "pickup_cereal", true));
+        eventSounds.Add(new EventSound(ItemType.CD, SpotType.Hand, "pickup_cd", true));
+        eventSounds.Add(new EventSound(ItemType.ToiletBrush, SpotType.Hand, "pickup_toiletbrush", true));
+
+        eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Head, "destroy_beer", false));
+        eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Head, "destroy_cheese", false));
+        eventSounds.Add(new EventSound(ItemType.Bread, SpotType.Head, "destroy_bread", false));
+        eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Head, "destroy_banana", false));
+        eventSounds.Add(new EventSound(ItemType.Chocolate, SpotType.Head, "destroy_chocolate", false));
+
+        eventSounds.Add(new EventSound(ItemType.CD, SpotType.CDPlayer, "destroy_cd", true));
     }
 
     public void PlaySound(AudioClip clip) {
