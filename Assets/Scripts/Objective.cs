@@ -46,17 +46,22 @@ class Objective {
         ObjectiveController.instance.ObjectiveFinalized(this);
     }
 
-    private IEnumerator PlayAudio(String audio, float minWaitTime = -1) {
+    private IEnumerator PlayAudio(String audio, float minWaitTime = 0) {
         AudioSource player = Player.instance.GetComponent<AudioSource>();
         yield return new WaitWhile(() => player.isPlaying);
         AudioClip clip = Resources.Load<AudioClip>(audio);
+        
+        float waitTime = minWaitTime;
+
         if (clip != null) {
             player.PlayOneShot(clip);
-
-            float waitTime = clip.length;
-            if (minWaitTime > clip.length) {
-                waitTime = minWaitTime;
+            if (clip.length > waitTime) {
+                waitTime = clip.length;
             }
+        }
+
+
+        if (waitTime > 0) {
             yield return new WaitForSeconds(waitTime);
         }
     }
