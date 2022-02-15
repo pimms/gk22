@@ -12,6 +12,7 @@ public enum SpotType {
     ToiletHeadPosition,
     CDPlayer,
     SofaHeadPosition,
+    Mouth,
 }
 
 [RequireComponent(typeof(Collider))]

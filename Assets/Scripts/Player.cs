@@ -35,11 +35,11 @@ public class Player : MonoBehaviour, EventListener
         eventSounds.Add(new EventSound(ItemType.CD, SpotType.Hand, "pickup_cd", true));
         eventSounds.Add(new EventSound(ItemType.ToiletBrush, SpotType.Hand, "pickup_toiletbrush", true));
 
-        eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Head, "destroy_beer", false));
-        eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Head, "destroy_cheese", false));
-        eventSounds.Add(new EventSound(ItemType.Bread, SpotType.Head, "destroy_bread", false));
-        eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Head, "destroy_banana", false));
-        eventSounds.Add(new EventSound(ItemType.Chocolate, SpotType.Head, "destroy_chocolate", false));
+        eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Mouth, "destroy_beer", false));
+        eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Mouth, "destroy_cheese", false));
+        eventSounds.Add(new EventSound(ItemType.Bread, SpotType.Mouth, "destroy_bread", false));
+        eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Mouth, "destroy_banana", false));
+        eventSounds.Add(new EventSound(ItemType.Chocolate, SpotType.Mouth, "destroy_chocolate", false));
         eventSounds.Add(new EventSound(ItemType.Jeans, SpotType.Legs, "destroy_jeans", true));
 
         eventSounds.Add(new EventSound(ItemType.CD, SpotType.CDPlayer, "destroy_cd", true));
