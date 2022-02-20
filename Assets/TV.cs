@@ -17,6 +17,7 @@ public class TV: MonoBehaviour, EventListener {
         if (itemEvent == null) return;
 
         if (itemEvent.item == ItemType.PS5Controller && itemEvent.spot == SpotType.Hand) {
+            hasStarted = true;
             StartCoroutine(PlayIntro());
         }
     }
