@@ -7,7 +7,7 @@ public class StaticCollder: MonoBehaviour
     // Use this for initialization
     void Start () {
         foreach (Transform childObject in transform) {
-            if (childObject.name.Contains("NOPHYSICS") || childObject.name.Contains("MOVABLE")) {
+            if (childObject.name.Contains("NOPHYSICS")) {
                 continue;
             }
 
@@ -15,6 +15,12 @@ public class StaticCollder: MonoBehaviour
             if (mesh != null) {
                 MeshCollider meshCollider = childObject.gameObject.AddComponent<MeshCollider>();
                 meshCollider.sharedMesh = mesh;
+
+                if (childObject.name.Contains("MOVABLE")) {
+                    childObject.gameObject.AddComponent<BoxCollider>();
+                    childObject.gameObject.AddComponent<Rigidbody>();
+                    childObject.gameObject.AddComponent<OVRGrabbable>();
+                }
             }
         }
     }
