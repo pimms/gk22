@@ -30,6 +30,22 @@ public class Event {
     }
 }
 
+public class ObjectiveEvent: Event {
+    public string objectiveId;
+
+    public static ObjectiveEvent changed(string objectiveId) {
+        return new ObjectiveEvent(EventType.ObjectiveChanged, objectiveId);
+    }
+
+    public static ObjectiveEvent completed(string objectiveId) {
+        return new ObjectiveEvent(EventType.ObjectiveCompleted, objectiveId);
+    }
+
+    private ObjectiveEvent(EventType type, string objectiveId) : base(type) {
+        this.objectiveId = objectiveId;
+    }
+}
+
 public class RoomEvent: Event {
     public RoomType room;
 

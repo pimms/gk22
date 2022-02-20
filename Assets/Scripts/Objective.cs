@@ -30,7 +30,7 @@ class Objective {
 
     public IEnumerator Activate() {
         yield return PlayAudio(preactivationAudio);
-        EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+        EventHub.instance.Raise(ObjectiveEvent.changed(id));
         yield return PlayAudio(activationAudio);
     }
 
@@ -42,7 +42,7 @@ class Objective {
     }
 
     private IEnumerator Finalize() {
-        EventHub.instance.Raise(new Event(EventType.ObjectiveCompleted));
+        EventHub.instance.Raise(ObjectiveEvent.completed(id));
         yield return PlayAudio(completionAudio, 5);
         ObjectiveController.instance.ObjectiveFinalized(this);
     }

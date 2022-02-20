@@ -59,7 +59,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
         currentObjectiveIndex++;
         transitioningBetweenObjectives = true;
-        EventHub.instance.Raise(new Event(EventType.ObjectiveChanged));
+        EventHub.instance.Raise(ObjectiveEvent.changed(null));
         StartCoroutine(ActivateCurrentObjective(3));
     }
 
