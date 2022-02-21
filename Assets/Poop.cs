@@ -13,7 +13,7 @@ public class Poop: MonoBehaviour, EventListener {
             return;
         }
 
-        if (objectiveEvent.objectiveId == "toilet") {
+        if (objectiveEvent.type == EventType.ObjectiveCompleted && objectiveEvent.objectiveId == "toilet") {
             for (int i=0; i<transform.childCount; i++) {
                 GameObject child = transform.GetChild(i).gameObject;
                 child.SetActive(true);

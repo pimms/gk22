@@ -20,22 +20,22 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
     private ObjectiveController() {
         objectives = new Objective [] {
-            new Objective(ItemEvent.placedItem(ItemType.Fedora, SpotType.Head), "Kle på deg", "get_dressed"),
-            new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "make_bed"),
-            new Objective(ItemEvent.placedItem(ItemType.Toothbrush, SpotType.Toilet), "Puss tennene", "brush_teeth"),
+            new Objective(ItemEvent.placedItem(ItemType.Fedora, SpotType.Head), "Kle på deg", "get_dressed", 10f),
+            new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "make_bed", 0f),
+            new Objective(ItemEvent.placedItem(ItemType.Toothbrush, SpotType.Toilet), "Puss tennene", "brush_teeth", 0f),
             new Objective(ItemEvent.placedItem(ItemType.Beer, SpotType.Head), "Drikk en kopp kaffe", "coffee"),
             new Objective(ItemEvent.placedItem(ItemType.PS5Controller, SpotType.Hand), "Gå på jobb", "job"),
-            new Objective(ItemEvent.placedItem(ItemType.Chocolate, SpotType.Head), "Spis en sunn lunch", "lunch"),
+            new Objective(ItemEvent.placedItem(ItemType.Cake, SpotType.Head), "Spis en sunn lunch", "lunch"),
             new Objective(ItemEvent.placedItem(ItemType.Head, SpotType.ToiletHeadPosition), "Gå og bæsj", "toilet"),
-            new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Børst toalettet", "toilet_cleanup"),
-            new Objective(ItemEvent.placedItem(ItemType.Butt, SpotType.Sofa), "Dra på trening", "gym"),
+            new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Børst toalettet", "toilet_cleanup", 0f),
+            new Objective(ItemEvent.placedItem(ItemType.Butt, SpotType.Sofa), "Dra på trening", "gym", 0f),
         };
     }
 
     void Start() {
         ObjectiveController.instance = this;
         EventHub.instance.AddListener(this);
-        StartCoroutine(ActivateCurrentObjective(3));
+        StartCoroutine(ActivateCurrentObjective());
     }
 
     void Destroy() {
@@ -43,9 +43,10 @@ class ObjectiveController: MonoBehaviour, EventListener {
         EventHub.instance.RemoveListener(this);
     }
 
-    private IEnumerator ActivateCurrentObjective(float delay) {
+    private IEnumerator ActivateCurrentObjective() {
         if (currentObjectiveIndex < objectives.Length) {
-            yield return new WaitForSeconds(delay);
+            Objective objective = objectives[currentObjectiveIndex];
+            yield return new WaitForSeconds(objective.activationDelay);
             transitioningBetweenObjectives = false;
             StartCoroutine(objectives[currentObjectiveIndex].Activate());
         }
@@ -60,7 +61,7 @@ class ObjectiveController: MonoBehaviour, EventListener {
         currentObjectiveIndex++;
         transitioningBetweenObjectives = true;
         EventHub.instance.Raise(ObjectiveEvent.changed(null));
-        StartCoroutine(ActivateCurrentObjective(3));
+        StartCoroutine(ActivateCurrentObjective());
     }
 
     public void HandleEvent(Event e) {

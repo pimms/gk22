@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 class Objective {
+    public float activationDelay;
+
     private Event expectedEvent;
     private String description;
     private String id;
@@ -13,9 +15,10 @@ class Objective {
     private String activationAudio { get { return "Sounds/activate_" + id; } }
     private String completionAudio { get { return "Sounds/comp_" + id; } }
 
-    public Objective(Event expectedEvent, String description, String id) {
+    public Objective(Event expectedEvent, String description, String id, float activationDelay = 3) {
         this.expectedEvent = expectedEvent;
         this.description = description;
+        this.activationDelay = activationDelay;
         
         if (id != null) {
             this.id = id;
