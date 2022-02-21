@@ -17,8 +17,9 @@ public class CDPlayer: MonoBehaviour, EventListener {
         if (itemEvent == null) return;
 
         if (itemEvent.item == ItemType.CD && itemEvent.spot == SpotType.CDPlayer) {
-            AudioClip clip = Resources.Load<AudioClip>("Sounds/ikkesann");
-            audioSource.PlayOneShot(clip);
+            // AudioClip clip = Resources.Load<AudioClip>("Sounds/ikkesann");
+            // audioSource.PlayOneShot(clip);
+            audioSource.Play();
         }
     }
 }
