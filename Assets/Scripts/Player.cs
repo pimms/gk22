@@ -33,7 +33,8 @@ public class Player : MonoBehaviour, EventListener
         eventSounds.Add(new EventSound(ItemType.Fedora, SpotType.Hand, "pickup_fedora", true));
         eventSounds.Add(new EventSound(ItemType.Cereal, SpotType.Hand, "pickup_cereal", true));
         eventSounds.Add(new EventSound(ItemType.CD, SpotType.Hand, "pickup_cd", true));
-        eventSounds.Add(new EventSound(ItemType.ToiletBrush, SpotType.Hand, "pickup_toiletbrush", true));
+        eventSounds.Add(new EventSound(ItemType.ToiletBrush, SpotType.Hand, "pickup_toiletbrush", false));
+        eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Hand, "pickup_banana", false));
 
         eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Mouth, "destroy_beer", false));
         eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Mouth, "destroy_cheese", false));
