@@ -13,13 +13,17 @@ public class StaticCollder: MonoBehaviour
 
             Mesh mesh = childObject.gameObject.GetComponent<MeshFilter>().mesh;
             if (mesh != null) {
-                MeshCollider meshCollider = childObject.gameObject.AddComponent<MeshCollider>();
-                meshCollider.sharedMesh = mesh;
-
                 if (childObject.name.Contains("MOVABLE")) {
                     childObject.gameObject.AddComponent<BoxCollider>();
                     childObject.gameObject.AddComponent<Rigidbody>();
                     childObject.gameObject.AddComponent<OVRGrabbable>();
+                } else {
+                    MeshCollider meshCollider = childObject.gameObject.AddComponent<MeshCollider>();
+                    meshCollider.sharedMesh = mesh;
+
+                    Rigidbody rigidbody = childObject.gameObject.AddComponent<Rigidbody>();
+                    rigidbody.isKinematic = true;
+                    rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 }
             }
         }
