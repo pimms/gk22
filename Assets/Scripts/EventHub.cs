@@ -20,6 +20,7 @@ class EventHub {
     }
 
     public void Raise(Event e) {
+        Debug.Log("Raising event " + e.type);
         for (int i = 0; i < listeners.Count; i++) {
             listeners[i].HandleEvent(e);
         }

@@ -36,6 +36,7 @@ public class TV: MonoBehaviour, EventListener {
             yield return new WaitForSeconds(5f);
         }
 
+        EventHub.instance.Raise(new Event(EventType.DSIntroCompleted));
         yield return null;
     }
 }

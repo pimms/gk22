@@ -12,6 +12,7 @@ public enum EventType {
 
     ItemPlacedInSpot,
     ItemRemovedFromSpot,
+    DSIntroCompleted,
 }
 
 public enum RoomType {
@@ -27,6 +28,16 @@ public class Event {
 
     public Event(EventType type) {
         this.type = type;
+    }
+
+    public override bool Equals(object? obj) {
+        if (obj == null) return false;
+        if (obj.GetType() != this.GetType()) return false;
+        return this.type == ((Event)obj).type;
+    }
+
+    public override int GetHashCode() {
+        return type.GetHashCode();
     }
 }
 

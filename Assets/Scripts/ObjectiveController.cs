@@ -20,12 +20,12 @@ class ObjectiveController: MonoBehaviour, EventListener {
 
     private ObjectiveController() {
         objectives = new Objective [] {
-            new Objective(ItemEvent.placedItem(ItemType.Fedora, SpotType.Head), "Kle på deg", "get_dressed", 10f),
+            new Objective(ItemEvent.placedItem(ItemType.Fedora, SpotType.Head), "Kle på deg", "get_dressed", 4f),
             new Objective(RoomEvent.leftRoom(RoomType.Bedroom), "Re opp sengen", "make_bed", 0f),
             new Objective(ItemEvent.placedItem(ItemType.Toothbrush, SpotType.Toilet), "Puss tennene", "brush_teeth", 0f),
             new Objective(ItemEvent.placedItem(ItemType.Beer, SpotType.Head), "Drikk en kopp kaffe", "coffee"),
-            new Objective(ItemEvent.placedItem(ItemType.PS5Controller, SpotType.Hand), "Gå på jobb", "job"),
-            new Objective(ItemEvent.placedItem(ItemType.Cake, SpotType.Head), "Spis en sunn lunch", "lunch"),
+            new Objective(new Event(EventType.DSIntroCompleted), "Gå på jobb", "job"),
+            new Objective(ItemEvent.placedItem(ItemType.Cake, SpotType.Head), "Spis en sunn lunch", "lunch", 0f),
             new Objective(ItemEvent.placedItem(ItemType.Head, SpotType.ToiletHeadPosition), "Gå og bæsj", "toilet"),
             new Objective(RoomEvent.leftRoom(RoomType.Bathroom), "Børst toalettet", "toilet_cleanup", 0f),
             new Objective(ItemEvent.placedItem(ItemType.Butt, SpotType.Sofa), "Dra på trening", "gym", 0f),

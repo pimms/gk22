@@ -46,7 +46,7 @@ class Objective {
 
     private IEnumerator Finalize() {
         EventHub.instance.Raise(ObjectiveEvent.completed(id));
-        yield return PlayAudio(completionAudio, 5);
+        yield return PlayAudio(completionAudio, 3);
         ObjectiveController.instance.ObjectiveFinalized(this);
     }
 

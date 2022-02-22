@@ -36,6 +36,7 @@ public class Player : MonoBehaviour, EventListener
         eventSounds.Add(new EventSound(ItemType.ToiletBrush, SpotType.Hand, "pickup_toiletbrush", false));
         eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Hand, "pickup_banana", true));
         eventSounds.Add(new EventSound(ItemType.Cake, SpotType.Hand, "pickup_cake", true));
+        eventSounds.Add(new EventSound(ItemType.PS5Controller, SpotType.Hand, "pickup_controller", true));
 
         eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Head, "destroy_beer", false));
         eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Head, "destroy_cheese", false));
