@@ -20,6 +20,8 @@ public enum ItemType {
     Chocolate,
     PS5Controller,
     Cake,
+    Cup,
+    BirthdayCard,
 }
 
 class PlaceableItem: MonoBehaviour {
