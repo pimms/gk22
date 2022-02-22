@@ -24,15 +24,33 @@ public enum ItemType {
     BirthdayCard,
 }
 
-class PlaceableItem: MonoBehaviour {
+class PlaceableItem: MonoBehaviour, EventListener {
     public ItemType type;
     public SpotType destroyWhenPlacedIn;
+    public string requiredForObjective;
+    
+    private bool canDestroy = true;
 
+    void Start() {
+        if (string.IsNullOrEmpty(requiredForObjective)) {
+            canDestroy = true;
+        } else {
+            canDestroy = false;
+            EventHub.instance.AddListener(this);
+        }
+    }
 
     void OnTriggerEnter(Collider other) {
         PlaceableSpot spot = other.GetComponent<PlaceableSpot>();
-        if (spot != null && spot.type != SpotType.None && spot.type == destroyWhenPlacedIn) {
+        if (spot != null && spot.type != SpotType.None && spot.type == destroyWhenPlacedIn && canDestroy) {
             Destroy(gameObject);
+        }
+    }
+
+    public void HandleEvent(Event e) {
+        ObjectiveEvent objectiveEvent = e as ObjectiveEvent;
+        if (objectiveEvent != null && objectiveEvent.type == EventType.ObjectiveChanged && objectiveEvent.objectiveId == requiredForObjective) {
+            canDestroy = true;
         }
     }
 }

@@ -52,6 +52,13 @@ class Objective {
 
     private IEnumerator PlayAudio(String audio, float minWaitTime = 0) {
         AudioSource player = Player.instance.GetComponent<AudioSource>();
+
+        // Some objectives are finalized at the same time as a sound is played,
+        // but the sound will in those cases not yet have loaded, and the player
+        // will thus not yet be playing. Wait for 200ms to make sure the sound
+        // has loaded and is playing.
+        yield return new WaitForSeconds(0.2f);
+
         yield return new WaitWhile(() => player.isPlaying);
         AudioClip clip = Resources.Load<AudioClip>(audio);
         
