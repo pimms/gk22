@@ -41,6 +41,7 @@ public class Player : MonoBehaviour, EventListener
 
         eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Head, "destroy_beer", false));
         eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Head, "destroy_cheese", false));
+        eventSounds.Add(new EventSound(ItemType.Cake, SpotType.Head, "destroy_cheese", false));
         eventSounds.Add(new EventSound(ItemType.Bread, SpotType.Head, "destroy_bread", true));
         eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Head, "destroy_banana", false));
         eventSounds.Add(new EventSound(ItemType.Chocolate, SpotType.Head, "destroy_chocolate", false));
