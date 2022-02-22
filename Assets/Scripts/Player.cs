@@ -37,6 +37,7 @@ public class Player : MonoBehaviour, EventListener
         eventSounds.Add(new EventSound(ItemType.Banana, SpotType.Hand, "pickup_banana", true));
         eventSounds.Add(new EventSound(ItemType.Cake, SpotType.Hand, "pickup_cake", true));
         eventSounds.Add(new EventSound(ItemType.PS5Controller, SpotType.Hand, "pickup_controller", true));
+        eventSounds.Add(new EventSound(ItemType.Toothbrush, SpotType.Hand, "pickup_toothbrush", false));
 
         eventSounds.Add(new EventSound(ItemType.Beer, SpotType.Head, "destroy_beer", false));
         eventSounds.Add(new EventSound(ItemType.Cheese, SpotType.Head, "destroy_cheese", false));
@@ -72,9 +73,9 @@ public class Player : MonoBehaviour, EventListener
                 AudioClip clip = Resources.Load<AudioClip>("Sounds/" + sound.sound);
                 if (clip != null) {
                     PlaySound(clip);
-                }
-                if (sound.onceOnly) {
-                    eventSounds.RemoveAt(i);
+                    if (sound.onceOnly) {
+                        eventSounds.RemoveAt(i);
+                    }
                 }
                 break;
             }
